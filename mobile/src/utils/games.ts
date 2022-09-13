@@ -1,11 +1,6 @@
-interface Game {
-  id: string;
-  name: string;
-  ads: string;
-  cover: string;
-}
+import { GameCardProps } from "../components/GameCard";
 
-export const GAMES: Game[] = [
+export const GAMES: GameCardProps[] = [
   {
     id: '1',
     name: 'League of Legends',
