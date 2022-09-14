@@ -28,6 +28,9 @@
 - List ads by game
 - Find Discord username by Ad ID
 
+# Bônus 🎁
+- Add validation [zod](https://github.com/colinhacks/zod) on POST methods
+
 # Read more...
 
 ## HTTP methods | API RESTful | HTTP Codes
