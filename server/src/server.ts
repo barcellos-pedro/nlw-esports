@@ -58,8 +58,17 @@ app.get('/games/:id/ads', async (request, response) => {
 });
 
 // Find Discord by Ad ID
-app.get('/ads/:id/discord', (request, response) => {
-  return response.send(request.params.id);
+app.get('/ads/:id/discord', async (request, response) => {
+  const username = await prisma.ad.findFirstOrThrow({
+    where: {
+      id: request.params.id,
+    },
+    select: {
+      discord: true,
+    },
+  });
+
+  return response.json(username);
 });
 
 app.listen(3000, () => console.log('Server running on localhost:3000'));
