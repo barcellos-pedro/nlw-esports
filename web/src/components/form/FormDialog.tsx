@@ -1,5 +1,5 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import { GameController } from 'phosphor-react';
+import { GameController, MagnifyingGlassPlus } from 'phosphor-react';
 import { getFirstLetter, WEEKDAYS } from '../../utils/week-days';
 import { CreateAdBanner } from '../CreateAdBanner';
 import { Input } from './Input';
@@ -7,9 +7,16 @@ import { Input } from './Input';
 export function FormDialog() {
   return (
     <Dialog.Root>
-      <CreateAdBanner />
+      <CreateAdBanner>
+        <Dialog.Trigger className="flex items-center gap-3 bg-violet-500 text-white rounded py-3 px-4 hover:bg-violet-600">
+          <MagnifyingGlassPlus size={24} />
+          Publicar anúncio
+        </Dialog.Trigger>
+      </CreateAdBanner>
+
       <Dialog.Portal>
         <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
+
         <Dialog.Content className="fixed bg-[#2A2634] pt-8 px-10 text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg shadow-lg shadow-black/25">
           <Dialog.Title className="text-2xl font-black">
             Publique um anúncio
