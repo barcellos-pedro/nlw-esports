@@ -10,7 +10,7 @@ export function FormDialog() {
       <CreateAdBanner />
       <Dialog.Portal>
         <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
-        <Dialog.Content className="fixed bg-[#2A2634] py-8 px-10 text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg shadow-lg shadow-black/25">
+        <Dialog.Content className="fixed bg-[#2A2634] pt-8 px-10 text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg shadow-lg shadow-black/25">
           <Dialog.Title className="text-2xl font-black">
             Publique um anúncio
           </Dialog.Title>
@@ -97,23 +97,22 @@ export function FormDialog() {
                 Costumo me conectar ao chat de voz
               </label>
             </div>
-          </form>
 
-          <div className="flex justify-end gap-4">
-            <Dialog.Close
-              type="button"
-              className="bg-zinc-500 rounded-md px-5 h-12 hover:bg-zinc-600"
-            >
-              Cancelar
-            </Dialog.Close>
-            <button
-              type="submit"
-              className="flex items-center gap-3 bg-violet-500 rounded-md h-12 px-5 hover:bg-violet-600"
-            >
-              <GameController size={24} /> Encontrar duo
-            </button>
-          </div>
-          <Dialog.Close />
+            <div className="flex justify-end gap-4">
+              <Dialog.Close
+                type="button"
+                className="bg-zinc-500 rounded-md px-5 h-12 hover:bg-zinc-600"
+              >
+                Cancelar
+              </Dialog.Close>
+              <button
+                type="submit"
+                className="flex items-center gap-3 bg-violet-500 rounded-md h-12 px-5 hover:bg-violet-600"
+              >
+                <GameController size={24} /> Encontrar duo
+              </button>
+            </div>
+          </form>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
