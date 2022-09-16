@@ -1,6 +1,6 @@
-import { GameCardProps } from "../components/GameCard";
+import { Game } from "../components/GameCard";
 
-export const GAMES: GameCardProps[] = [
+export const GAMES: Game[] = [
   {
     id: '1',
     name: 'League of Legends',
