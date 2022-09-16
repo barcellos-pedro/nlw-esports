@@ -1,11 +1,32 @@
 import { FlatList, Image, View } from 'react-native';
+import { useEffect, useState } from 'react';
+
 import { styles } from './styles';
 import logo from '../../assets/logo-nlw-esports.png';
 import { Heading } from '../../components/Heading';
 import { GameCard } from '../../components/GameCard';
-import { GAMES } from '../../utils/games';
+import { Loading } from '../../components/Loading';
+import { Game } from '../../@types/game';
+import { gamesService } from '../../utils/games-service';
 
 export function Home() {
+  const [games, setGames] = useState<Game[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    gamesService
+      .getGames()
+      .then((data) => {
+        setGames(data);
+        setIsLoading(false);
+      })
+      .catch(console.error);
+  }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <View style={styles.container}>
       <Image source={logo} style={styles.logo} />
@@ -15,12 +36,12 @@ export function Home() {
         subtitle="Selecione o game que deseja jogar..."
       />
       <FlatList
-        data={GAMES}
+        data={games}
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.contentList}
         keyExtractor={(game) => game.id}
-        renderItem={({ item: game }) => <GameCard data={game} key={game.id} />}
+        renderItem={({ item: game }) => <GameCard game={game} key={game.id} />}
       />
     </View>
   );
