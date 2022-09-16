@@ -10,6 +10,7 @@ export function Home() {
     <View style={styles.container}>
       <Image source={logo} style={styles.logo} />
       <Heading
+        style={styles.heading}
         title="Encontre seu duo!"
         subtitle="Selecione o game que deseja jogar..."
       />
@@ -19,9 +20,7 @@ export function Home() {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.contentList}
         keyExtractor={(game) => game.id}
-        renderItem={({ item: game }) => (
-          <GameCard data={game} key={game.id} />
-        )}
+        renderItem={({ item: game }) => <GameCard data={game} key={game.id} />}
       />
     </View>
   );
