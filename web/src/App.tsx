@@ -58,10 +58,10 @@ function App() {
               Publique um anúncio
             </Dialog.Title>
 
-            <form className="py-8">
-              <div className="mb-4">
+            <form className="flex flex-col gap-4 py-8">
+              <div className="flex flex-col gap-2">
                 <label htmlFor="game" className="font-semibold">
-                  Qual o Game
+                  Qual o Game?
                 </label>
                 <Input
                   id="game"
@@ -70,7 +70,7 @@ function App() {
                 />
               </div>
 
-              <div className="pb-4">
+              <div className="flex flex-col gap-2">
                 <label className="font-semibold" htmlFor="name">
                   Seu nome (ou nickname)
                 </label>
@@ -81,8 +81,8 @@ function App() {
                 />
               </div>
 
-              <div className="flex justify-between pb-4">
-                <div>
+              <div className="grid grid-cols-2 gap-6">
+                <div className="flex flex-col gap-2">
                   <label className="font-semibold" htmlFor="yearsPlaying">
                     Joga há quantos anos?
                   </label>
@@ -92,7 +92,7 @@ function App() {
                     placeholder="Tudo bem ser zero"
                   />
                 </div>
-                <div>
+                <div className="flex flex-col gap-2">
                   <label className="font-semibold" htmlFor="discord">
                     Qual seu Discord?
                   </label>
@@ -100,31 +100,34 @@ function App() {
                 </div>
               </div>
 
-              <div className="flex justify-between gap-6">
-                <div>
+              <div className="flex gap-x-20">
+                <div className="flex flex-col gap-2">
                   <label className="font-semibold" htmlFor="weekDays">
                     Quando costuma jogar?
-                    {/* TODO: Criar component diferente de Input */}
+                    <div className='grid grid-cols-4 gap-2 pt-2'>
+                      <button type='button' title="Domingo" className='w-10 h-10 py-2 px-4 bg-zinc-900 rounded hover:bg-zinc-700 active:bg-violet-500'>D</button>
+                      <button type='button' title="Segunda" className='w-10 h-10 py-2 px-4 bg-zinc-900 rounded hover:bg-zinc-700 active:bg-violet-500'>S</button>
+                      <button type='button' title="Terça" className='w-10 h-10 py-2 px-4 bg-zinc-900 rounded hover:bg-zinc-700 active:bg-violet-500'>T</button>
+                      <button type='button' title="Quarta" className='w-10 h-10 py-2 px-4 bg-zinc-900 rounded hover:bg-zinc-700 active:bg-violet-500'>Q</button>
+                      <button type='button' title="Quinta" className='w-10 h-10 py-2 px-4 bg-zinc-900 rounded hover:bg-zinc-700 active:bg-violet-500'>Q</button>
+                      <button type='button' title="Sexta" className='w-10 h-10 py-2 px-4 bg-zinc-900 rounded hover:bg-zinc-700 active:bg-violet-500'>S</button>
+                      <button type='button' title="Sábado" className='w-10 h-10 py-2 px-4 bg-zinc-900 rounded hover:bg-zinc-700 active:bg-violet-500'>S</button>
+                    </div>
                   </label>
-                  <input
-                    id="weekDays"
-                    type="text"
-                    className="block text-sm rounded py-3 px-4 mt-2 bg-zinc-900 placeholder:text-zinc-500"
-                  />
                 </div>
-                <div>
+                <div className="flex flex-col gap-2 flex-1">
                   <label className="font-semibold" htmlFor="hourStart">
                     Qual horário do dia?
                   </label>
-                  <div className="flex gap-2">
+                  <div className="grid grid-cols-1 gap-2">
                     <Input type="time" id="hourStart" />
                     <Input type="time" id="hourEnd" />
                   </div>
                 </div>
               </div>
 
-              <div className="mt-6">
-                <label className="font-semibold" htmlFor="useVoiceChannel">
+              <div className="mt-2 text-sm">
+                <label htmlFor="useVoiceChannel">
                   <input
                     type="checkbox"
                     name="useVoiceChannel"
@@ -137,15 +140,15 @@ function App() {
             </form>
 
             <div className="flex justify-end gap-4">
-              <button
+              <Dialog.Close
                 type="button"
-                className="bg-zinc-500 rounded-lg py-4 px-5 hover:bg-zinc-600"
+                className="bg-zinc-500 rounded-md px-5 h-12 hover:bg-zinc-600"
               >
                 Cancelar
-              </button>
+              </Dialog.Close>
               <button
                 type="submit"
-                className="flex items-center gap-3 bg-violet-500 rounded-lg py-4 px-5 hover:bg-violet-600"
+                className="flex items-center gap-3 bg-violet-500 rounded-md h-12 px-5 hover:bg-violet-600"
               >
                 <GameController size={24} /> Encontrar duo
               </button>
