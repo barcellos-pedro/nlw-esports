@@ -81,7 +81,7 @@ function App() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                 <div className="flex flex-col gap-2">
                   <label className="font-semibold" htmlFor="yearsPlaying">
                     Joga há quantos anos?
@@ -100,7 +100,7 @@ function App() {
                 </div>
               </div>
 
-              <div className="flex gap-x-20">
+              <div className="grid grid-cols-1 gap-4 lg:flex gap-x-20">
                 <div className="flex flex-col gap-2">
                   <label className="font-semibold" htmlFor="weekDays">
                     Quando costuma jogar?
