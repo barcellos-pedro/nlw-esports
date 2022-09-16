@@ -20,9 +20,9 @@ interface Data extends TouchableOpacityProps {
   data: GameCardProps;
 }
 
-export function GameCard({ data, ...rest }: Data) {
+export function GameCard({ data, ...buttonProps }: Data) {
   return (
-    <TouchableOpacity style={style.container} {...rest}>
+    <TouchableOpacity style={style.container} {...buttonProps}>
       <ImageBackground style={style.cover} source={data.cover}>
         <LinearGradient colors={THEME.COLORS.FOOTER} style={style.footer}>
           <Text style={style.name}>{data.name}</Text>
