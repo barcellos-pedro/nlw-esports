@@ -1,4 +1,4 @@
-import { FlatList, Image, View } from 'react-native';
+import { FlatList, Image } from 'react-native';
 import { useEffect, useState } from 'react';
 
 import { styles } from './styles';
@@ -8,6 +8,7 @@ import { GameCard } from '../../components/GameCard';
 import { Loading } from '../../components/Loading';
 import { Game } from '../../@types/game';
 import { gamesService } from '../../utils/games-service';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export function Home() {
   const [games, setGames] = useState<Game[]>([]);
@@ -28,7 +29,7 @@ export function Home() {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Image source={logo} style={styles.logo} />
       <Heading
         style={styles.heading}
@@ -43,6 +44,6 @@ export function Home() {
         keyExtractor={(game) => game.id}
         renderItem={({ item: game }) => <GameCard game={game} key={game.id} />}
       />
-    </View>
+    </SafeAreaView>
   );
 }
