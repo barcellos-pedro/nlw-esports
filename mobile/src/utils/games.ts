@@ -1,6 +1,11 @@
-import { Game } from "../components/GameCard";
+interface GameMock {
+  id: string;
+  name: string;
+  ads: string;
+  cover: string;
+}
 
-export const GAMES: Game[] = [
+export const GAMES: GameMock[] = [
   {
     id: '1',
     name: 'League of Legends',
