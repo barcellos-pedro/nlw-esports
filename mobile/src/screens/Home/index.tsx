@@ -1,5 +1,6 @@
 import { FlatList, Image } from 'react-native';
 import { useEffect, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import { styles } from './styles';
 import logo from '../../assets/logo-nlw-esports.png';
@@ -11,9 +12,16 @@ import { gamesService } from '../../utils/games-service';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Background } from '../../components/Background';
 
-export function Home() {
+export function HomeScreen() {
   const [games, setGames] = useState<Game[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const navigation = useNavigation();
+
+  const navigateTo = (params: Game) => {
+    // Add some Curry instead of doing
+    // onPress={() => navigateTo(game)}
+    return () => navigation.navigate('game', { ...params });
+  };
 
   useEffect(() => {
     gamesService
@@ -45,7 +53,7 @@ export function Home() {
           contentContainerStyle={styles.contentList}
           keyExtractor={(game) => game.id}
           renderItem={({ item: game }) => (
-            <GameCard game={game} key={game.id} />
+            <GameCard game={game} key={game.id} onPress={navigateTo(game)} />
           )}
         />
       </SafeAreaView>
