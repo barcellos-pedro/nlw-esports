@@ -1,6 +1,9 @@
-export const handleResponse = <T>(response: Response): Promise<T> => {
+export const handleResponse = <T>(
+  response: Response,
+  errorMessage: string = 'Failed to fetch'
+): Promise<T> => {
   if (response.ok) {
     return response.json();
   }
-  throw new Error('Failed to fetch games');
+  throw new Error(errorMessage);
 };
