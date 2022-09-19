@@ -1,6 +1,9 @@
 import { Text, TouchableOpacity, View, ViewProps } from 'react-native';
+import { Entypo } from '@expo/vector-icons';
+
 import { DuoInfo } from '../DuoInfo';
 import { styles } from './styles';
+import { THEME } from '../../theme';
 
 interface DuoCardProps extends ViewProps {}
 
@@ -12,6 +15,7 @@ export function DuoCard({ ...viewProps }: DuoCardProps) {
       <DuoInfo style={styles.info} label="Disponibilidade" value="3 dias - 18h - 20h" />
       <DuoInfo style={styles.info} label="Chamada de áudio?" value="Sim" />
       <TouchableOpacity style={styles.button}>
+        <Entypo name="game-controller" color={THEME.COLORS.TEXT} size={20} />
         <Text style={styles.buttonText}>Conectar</Text>
       </TouchableOpacity>
     </View>
