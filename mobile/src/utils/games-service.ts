@@ -2,7 +2,10 @@ import { Game } from '../@types/game';
 import { handleResponse } from './handle-response';
 import { sleep } from './sleep';
 
-const BASE_URL = 'http://172.21.72.171:3000';
+// Get IP from WSL 2 distro => wsl hostname -I
+const IP = '172.26.163.43';
+const PORT = '3000';
+const BASE_URL = `http://${IP}:${PORT}`;
 
 export const gamesService = {
   async getGames() {
