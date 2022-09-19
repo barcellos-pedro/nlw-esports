@@ -1,7 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import {
   ImageBackground,
-  ImageSourcePropType,
   Text,
   TouchableOpacity,
   TouchableOpacityProps,
@@ -10,11 +9,11 @@ import { Game } from '../../@types/game';
 import { THEME } from '../../theme';
 import { style } from './styles';
 
-interface Data extends TouchableOpacityProps {
+interface GameCardProps extends TouchableOpacityProps {
   game: Game;
 }
 
-export function GameCard({ game, ...buttonProps }: Data) {
+export function GameCard({ game, ...buttonProps }: GameCardProps) {
   return (
     <TouchableOpacity style={style.container} {...buttonProps}>
       <ImageBackground style={style.cover} source={{ uri: game.bannerUrl }}>
