@@ -1,6 +1,5 @@
 import { StatusBar } from 'react-native';
 import { Background } from './src/components/Background';
-import { Home } from './src/screens/Home';
 import { Loading } from './src/components/Loading';
 import {
   useFonts,
