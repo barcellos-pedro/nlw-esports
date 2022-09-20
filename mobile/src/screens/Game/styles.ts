@@ -30,11 +30,14 @@ export const styles = StyleSheet.create({
     marginBottom: 24,
   },
   heading: {
-    marginBottom: 16
+    marginBottom: 32,
   },
   alert: {
     fontSize: THEME.FONT_SIZE.LG,
     color: THEME.COLORS.TEXT,
-    fontFamily: THEME.FONT_FAMILY.REGULAR
-  }
+    fontFamily: THEME.FONT_FAMILY.REGULAR,
+  },
+  contentList: {
+    paddingHorizontal: 32,
+  },
 });

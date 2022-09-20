@@ -7,12 +7,14 @@ export const styles = StyleSheet.create({
     backgroundColor: THEME.COLORS.SHAPE,
     padding: 20,
     borderRadius: 8,
-    marginRight: 16
+    marginRight: 24,
+    height: 300
   },
   info: {
-    marginVertical: 16,
+    marginVertical: 6,
   },
   button: {
+    marginTop: 8,
     paddingHorizontal: 26,
     paddingVertical: 8,
     backgroundColor: THEME.COLORS.PRIMARY,
