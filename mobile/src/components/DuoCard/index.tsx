@@ -16,7 +16,7 @@ export function DuoCard({ info, ...viewProps }: DuoCardProps) {
     const daysCount = info.weekDays.length;
     const start = getHour('hourStart');
     const end = getHour('hourEnd');
-    return `${daysCount} dia(s) - ${start}h - ${end}h`;
+    return `${daysCount} dia(s) \u2022 ${start}h - ${end}h`;
   };
 
   const useVoiceChannel = () => info.useVoiceChannel;
