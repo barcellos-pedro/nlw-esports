@@ -20,6 +20,10 @@ export function GameScreen() {
   const navigation = useNavigation();
   const [ads, setAds] = useState<Ad[]>([]);
 
+  const connectDiscord = () => {
+    console.log('Connecting to Discord...');
+  };
+
   const goBack = () => navigation.goBack();
 
   const fetchAds = async () => {
@@ -62,17 +66,16 @@ export function GameScreen() {
           style={styles.heading}
         />
 
-        {!ads.length ? (
-          <Text style={styles.alert}>Sem anúncios</Text>
-        ) : (
-          <FlatList
-            data={ads}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.contentList}
-            renderItem={({ item: ad }) => <DuoCard info={ad} key={ad.id} />}
-          />
-        )}
+        <FlatList
+          data={ads}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.contentList}
+          renderItem={({ item: ad }) => (
+            <DuoCard key={ad.id} info={ad} onConnect={connectDiscord} />
+          )}
+          ListEmptyComponent={<Text style={styles.alert}>Sem anúncios</Text>}
+        />
       </SafeAreaView>
     </Background>
   );
