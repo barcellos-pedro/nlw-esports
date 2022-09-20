@@ -8,9 +8,10 @@ import { Ad } from '../../@types/ad';
 
 interface DuoCardProps extends ViewProps {
   info: Ad;
+  onConnect: () => void;
 }
 
-export function DuoCard({ info, ...viewProps }: DuoCardProps) {
+export function DuoCard({ info, onConnect, ...viewProps }: DuoCardProps) {
   const getHour = (hour: 'hourStart' | 'hourEnd') => info[hour].split(':')[0];
   const getWeekDays = () => {
     const daysCount = info.weekDays.length;
@@ -45,7 +46,7 @@ export function DuoCard({ info, ...viewProps }: DuoCardProps) {
         value={useVoiceChannel() ? 'Sim' : 'Não'}
         valueColor={voiceChannelTextColor()}
       />
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={onConnect}>
         <Entypo name="game-controller" color={THEME.COLORS.TEXT} size={20} />
         <Text style={styles.buttonText}>Conectar</Text>
       </TouchableOpacity>
