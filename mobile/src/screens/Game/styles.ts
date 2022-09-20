@@ -38,6 +38,6 @@ export const styles = StyleSheet.create({
     fontFamily: THEME.FONT_FAMILY.REGULAR,
   },
   contentList: {
-    paddingHorizontal: 32,
+    paddingHorizontal: 64,
   },
 });
