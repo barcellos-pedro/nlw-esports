@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
     backgroundColor: THEME.COLORS.SHAPE,
     padding: 20,
     borderRadius: 8,
+    marginRight: 16
   },
   info: {
     marginVertical: 16,
