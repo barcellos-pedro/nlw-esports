@@ -4,7 +4,7 @@ import { handleResponse } from './handle-response';
 import { sleep } from './sleep';
 
 // Get IP from WSL 2 distro => wsl hostname -I
-const IP = '172.23.159.244';
+const IP = '172.30.255.50';
 const PORT = '3000';
 const BASE_URL = `http://${IP}:${PORT}`;
 

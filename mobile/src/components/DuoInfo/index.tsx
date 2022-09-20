@@ -17,7 +17,9 @@ export function DuoInfo({
   return (
     <View style={styles.container} {...viewProps}>
       <Text style={styles.label}>{label}</Text>
-      <Text style={[styles.value, { color: valueColor }]}>{value}</Text>
+      <Text numberOfLines={1} style={[styles.value, { color: valueColor }]}>
+        {value}
+      </Text>
     </View>
   );
 }
