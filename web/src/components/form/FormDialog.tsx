@@ -94,7 +94,7 @@ export function FormDialog() {
             </div>
 
             <div className="mt-2 text-sm">
-              <label htmlFor="useVoiceChannel">
+              <label htmlFor="useVoiceChannel" className="font-semibold">
                 <input
                   type="checkbox"
                   name="useVoiceChannel"
