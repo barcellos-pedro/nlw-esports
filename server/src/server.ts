@@ -37,23 +37,31 @@ app.get('/games', async (request, response) => {
 
 // Create new ad
 app.post('/games/:id/ads', async (request, response) => {
-  const gameId = request.params.id;
-  const { body } = request;
+  try {
+    const gameId = request.params.id;
+    const { body } = request;
 
-  const newAd = await prisma.ad.create({
-    data: {
-      gameId,
-      name: body.name,
-      yearsPlaying: +body.yearsPlaying, // parse to Number/Int
-      discord: body.discord,
-      weekDays: body.weekDays.join(','), // [0, 1] => '0, 1, 3'
-      hourStart: convertHourToMinutes(body.hourStart), // '13:00' => 780
-      hourEnd: convertHourToMinutes(body.hourEnd),
-      useVoiceChannel: body.useVoiceChannel,
-    },
-  });
+    const newAd = await prisma.ad.create({
+      data: {
+        gameId,
+        name: body.name,
+        yearsPlaying: +body.yearsPlaying, // parse to Number/Int
+        discord: body.discord,
+        weekDays: body.weekDays.join(','), // [0, 1] => '0, 1, 3'
+        hourStart: convertHourToMinutes(body.hourStart), // '13:00' => 780
+        hourEnd: convertHourToMinutes(body.hourEnd),
+        useVoiceChannel: body.useVoiceChannel,
+      },
+    });
 
-  return response.json(newAd);
+    return response.json(newAd);
+  } catch (error: any) {
+    response.status(500).json({
+      name: error.name,
+      message: error.message,
+      stack: error.stack, // only in development mode
+    });
+  }
 });
 
 // List ads by game
@@ -101,10 +109,10 @@ app.get('/ads/:id/discord', async (request, response, next) => {
 
     return response.json(username);
   } catch (error: any) {
-    response.status(404).json({
+    response.status(500).json({
       name: error.name,
       message: error.message,
-      stack: error.stack // only in development mode
+      stack: error.stack, // only in development mode
     });
   }
 });
