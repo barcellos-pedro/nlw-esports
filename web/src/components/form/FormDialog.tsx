@@ -27,21 +27,27 @@ export function FormDialog({ selectData }: FormDialogProps) {
 
   // TODO: Add form validation
   // Maybe Zod? => https://github.com/colinhacks/zod
-  const onSubmit = (event: FormEvent) => {
+  const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
-    const newAd: any = {
-      ...formData,
-      useVoiceChannel: useVoiceChannel ? true : false,
-      weekDays: days.map(Number),
-    };
+    try {
+      const newAd: any = {
+        ...formData,
+        useVoiceChannel: useVoiceChannel ? true : false,
+        weekDays: days.map(Number),
+      };
 
-    axios
-      .post(`http://localhost:3000/games/${newAd.gameId}/ads`, { ...newAd })
-      .then(console.log)
-      .catch(console.error);
+      const result = await axios.post(
+        `http://localhost:3000/games/${newAd.gameId}/ads`,
+        { ...newAd }
+      );
 
-    console.log(newAd);
+      console.log(newAd);
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+      alert('Falha ao criar anúncio.');
+    }
   };
 
   const weekDayBackground = (value: string) => {
