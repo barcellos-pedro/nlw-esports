@@ -3,15 +3,7 @@ import { useEffect, useState } from 'react';
 import logo from './assets/logo-nlw-esports.svg';
 import { GameBanner } from './components/GameBanner';
 import { FormDialog } from './components/form/FormDialog';
-
-interface Game {
-  id: string;
-  title: string;
-  bannerUrl: string;
-  _count: {
-    ads: number;
-  };
-}
+import { Game } from './utils/types/Game';
 
 function App() {
   const [games, setGames] = useState<Game[]>([]);
@@ -45,7 +37,7 @@ function App() {
         ))}
       </div>
 
-      <FormDialog />
+      <FormDialog selectData={games} />
     </div>
   );
 }
