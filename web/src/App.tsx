@@ -1,4 +1,5 @@
 import './styles/main.css';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import logo from './assets/logo-nlw-esports.svg';
 import { GameBanner } from './components/GameBanner';
@@ -9,9 +10,10 @@ function App() {
   const [games, setGames] = useState<Game[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/games')
-      .then((response) => (response.ok ? response.json() : []))
-      .then((data) => setGames(data));
+    axios
+      .get('http://localhost:3000/games')
+      .then(({ data }) => setGames(data))
+      .catch(console.error);
   }, []);
 
   return (
