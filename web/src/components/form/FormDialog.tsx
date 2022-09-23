@@ -6,7 +6,7 @@ import { CreateAdBanner } from '../CreateAdBanner';
 import { Input } from './Input';
 import { Checkbox } from './Checkbox';
 import { Game } from '../../utils/types/Game';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface FormDialogProps {
   selectData: Game[];
@@ -17,10 +17,6 @@ export function FormDialog({ selectData }: FormDialogProps) {
   const weekDayBackground = (value: string) => {
     return days.includes(value) ? 'bg-violet-500' : 'bg-zinc-900';
   };
-
-  // useEffect(() => {
-  //   console.log(days);
-  // }, [days]);
 
   return (
     <Dialog.Root>
@@ -95,9 +91,10 @@ export function FormDialog({ selectData }: FormDialogProps) {
                 <label className="font-semibold" htmlFor="weekDays">
                   Quando costuma jogar?
                   <ToggleGroup.Root
+                    value={days}
                     type="multiple"
                     orientation="horizontal"
-                    onValueChange={(values) => setDays(values)}
+                    onValueChange={setDays}
                     className="grid grid-cols-4 gap-2 pt-2"
                   >
                     {WEEKDAYS.map((value, index) => (
