@@ -1,5 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import { GameController, MagnifyingGlassPlus } from 'phosphor-react';
+import * as Checkbox from '@radix-ui/react-checkbox';
+
+import { GameController, MagnifyingGlassPlus, Check } from 'phosphor-react';
 import { getFirstLetter, WEEKDAYS } from '../../utils/week-days';
 import { CreateAdBanner } from '../CreateAdBanner';
 import { Input } from './Input';
@@ -93,14 +95,21 @@ export function FormDialog() {
               </div>
             </div>
 
-            <div className="mt-2 text-sm">
-              <label htmlFor="useVoiceChannel" className="font-semibold">
-                <input
-                  type="checkbox"
-                  name="useVoiceChannel"
-                  id="useVoiceChannel"
-                  className="mr-2"
-                />
+            <div className="mt-2 flex items-center gap-2">
+              <Checkbox.Root
+                id="useVoiceChannel"
+                name="useVoiceChannel"
+                className="bg-zinc-900 p-1 rounded h-7 w-7"
+                onCheckedChange={(checked) => console.log(checked)}
+              >
+                <Checkbox.Indicator className="text-emerald-400">
+                  <Check size={20} />
+                </Checkbox.Indicator>
+              </Checkbox.Root>
+              <label
+                htmlFor="useVoiceChannel"
+                className="text-sm font-semibold"
+              >
                 Costumo me conectar ao chat de voz
               </label>
             </div>
