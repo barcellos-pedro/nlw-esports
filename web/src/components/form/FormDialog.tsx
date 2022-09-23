@@ -1,16 +1,18 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
+import axios from 'axios';
 import { GameController, MagnifyingGlassPlus } from 'phosphor-react';
 import { getFirstLetter, WEEKDAYS } from '../../utils/week-days';
 import { CreateAdBanner } from '../CreateAdBanner';
 import { Input } from './Input';
 import { Checkbox } from './Checkbox';
 import { Game } from '../../utils/types/Game';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 
 interface FormDialogProps {
   selectData: Game[];
 }
+
 export function FormDialog({ selectData }: FormDialogProps) {
   const [days, setDays] = useState<string[]>([]);
   const [useVoiceChannel, setUseVoiceChannel] = useState<boolean>();
@@ -25,16 +27,21 @@ export function FormDialog({ selectData }: FormDialogProps) {
 
   // TODO: Add form validation
   // Maybe Zod? => https://github.com/colinhacks/zod
-  const onSubmit = (event: any) => {
+  const onSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-    const data = {
+    const newAd: any = {
       ...formData,
-      useVoiceChannel,
+      useVoiceChannel: useVoiceChannel ? true : false,
       weekDays: days.map(Number),
     };
 
-    console.log(data);
+    axios
+      .post(`http://localhost:3000/games/${newAd.gameId}/ads`, { ...newAd })
+      .then(console.log)
+      .catch(console.error);
+
+    console.log(newAd);
   };
 
   const weekDayBackground = (value: string) => {
