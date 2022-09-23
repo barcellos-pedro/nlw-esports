@@ -4,8 +4,12 @@ import { getFirstLetter, WEEKDAYS } from '../../utils/week-days';
 import { CreateAdBanner } from '../CreateAdBanner';
 import { Input } from './Input';
 import { Checkbox } from './Checkbox';
+import { Game } from '../../utils/types/Game';
 
-export function FormDialog() {
+interface FormDialogProps {
+  selectData: Game[];
+}
+export function FormDialog({ selectData }: FormDialogProps) {
   return (
     <Dialog.Root>
       <CreateAdBanner>
@@ -28,11 +32,20 @@ export function FormDialog() {
               <label htmlFor="game" className="font-semibold">
                 Qual o Game?
               </label>
-              <Input
-                id="game"
-                type="text"
-                placeholder="Selecione o game que deseja jogar"
-              />
+              <select
+                defaultValue={'default'}
+                className="bg-zinc-900 py-3 px-4 text-sm appearance-none"
+                onChange={(event) => console.log(event.target.value)}
+              >
+                <option disabled value="default">
+                  Selecione o game que deseja jogar
+                </option>
+                {selectData.map((game) => (
+                  <option key={game.id} value={game.id}>
+                    {game.title}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="flex flex-col gap-2">
