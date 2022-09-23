@@ -1,5 +1,5 @@
 export const WEEKDAYS = [
-  'Doming',
+  'Domingo',
   'Segunda',
   'Terça',
   'Quarta',
