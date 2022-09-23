@@ -6,11 +6,22 @@ import { CreateAdBanner } from '../CreateAdBanner';
 import { Input } from './Input';
 import { Checkbox } from './Checkbox';
 import { Game } from '../../utils/types/Game';
+import { useEffect, useState } from 'react';
 
 interface FormDialogProps {
   selectData: Game[];
 }
 export function FormDialog({ selectData }: FormDialogProps) {
+  const [days, setDays] = useState<string[]>([]);
+
+  const weekDayBackground = (value: string) => {
+    return days.includes(value) ? 'bg-violet-500' : 'bg-zinc-900';
+  };
+
+  // useEffect(() => {
+  //   console.log(days);
+  // }, [days]);
+
   return (
     <Dialog.Root>
       <CreateAdBanner>
@@ -86,15 +97,17 @@ export function FormDialog({ selectData }: FormDialogProps) {
                   <ToggleGroup.Root
                     type="multiple"
                     orientation="horizontal"
-                    onValueChange={(day) => console.log(day)}
+                    onValueChange={(values) => setDays(values)}
                     className="grid grid-cols-4 gap-2 pt-2"
                   >
                     {WEEKDAYS.map((value, index) => (
                       <ToggleGroup.Item
                         key={index}
                         title={value}
-                        value={value}
-                        className="w-10 h-10 py-2 px-4 bg-zinc-900 rounded hover:bg-zinc-700 active:bg-violet-500"
+                        value={index.toString()}
+                        className={`w-10 h-10 py-2 px-4  rounded hover:bg-zinc-700 active:bg-violet-500 ${weekDayBackground(
+                          index.toString()
+                        )}`}
                       >
                         {getFirstLetter(value)}
                       </ToggleGroup.Item>
