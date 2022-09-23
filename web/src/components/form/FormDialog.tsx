@@ -13,6 +13,29 @@ interface FormDialogProps {
 }
 export function FormDialog({ selectData }: FormDialogProps) {
   const [days, setDays] = useState<string[]>([]);
+  const [useVoiceChannel, setUseVoiceChannel] = useState<boolean>();
+  const [formData, setFormData] = useState({});
+
+  const onFormChange = (event: any) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  // TODO: Add form validation
+  // Maybe Zod? => https://github.com/colinhacks/zod
+  const onSubmit = (event: any) => {
+    event.preventDefault();
+
+    const data = {
+      ...formData,
+      useVoiceChannel,
+      weekDays: days.map(Number),
+    };
+
+    console.log(data);
+  };
 
   const weekDayBackground = (value: string) => {
     return days.includes(value) ? 'bg-violet-500' : 'bg-zinc-900';
@@ -35,15 +58,16 @@ export function FormDialog({ selectData }: FormDialogProps) {
             Publique um anúncio
           </Dialog.Title>
 
-          <form className="flex flex-col gap-4 py-8">
+          <form className="flex flex-col gap-4 py-8" onSubmit={onSubmit}>
             <div className="flex flex-col gap-2">
               <label htmlFor="game" className="font-semibold">
                 Qual o Game?
               </label>
               <select
+                name="gameId"
                 defaultValue={'default'}
                 className="bg-zinc-900 py-3 px-4 text-sm appearance-none"
-                onChange={(event) => console.log(event.target.value)}
+                onChange={onFormChange}
               >
                 <option disabled value="default">
                   Selecione o game que deseja jogar
@@ -62,8 +86,10 @@ export function FormDialog({ selectData }: FormDialogProps) {
               </label>
               <Input
                 id="name"
+                name="name"
                 type="text"
                 placeholder="Como te chamam dentro do game?"
+                onChange={onFormChange}
               />
             </div>
 
@@ -74,15 +100,23 @@ export function FormDialog({ selectData }: FormDialogProps) {
                 </label>
                 <Input
                   id="yearsPlaying"
+                  name="yearsPlaying"
                   type="number"
                   placeholder="Tudo bem ser zero"
+                  onChange={onFormChange}
                 />
               </div>
               <div className="flex flex-col gap-2">
                 <label className="font-semibold" htmlFor="discord">
                   Qual seu Discord?
                 </label>
-                <Input id="discord" type="text" placeholder="Usuario#0000" />
+                <Input
+                  id="discord"
+                  name="discord"
+                  type="text"
+                  placeholder="Usuario#0000"
+                  onChange={onFormChange}
+                />
               </div>
             </div>
 
@@ -99,6 +133,7 @@ export function FormDialog({ selectData }: FormDialogProps) {
                   >
                     {WEEKDAYS.map((value, index) => (
                       <ToggleGroup.Item
+                        name="weekDays"
                         key={index}
                         title={value}
                         value={index.toString()}
@@ -117,8 +152,18 @@ export function FormDialog({ selectData }: FormDialogProps) {
                   Qual horário do dia?
                 </label>
                 <div className="grid grid-cols-1 gap-2">
-                  <Input type="time" id="hourStart" />
-                  <Input type="time" id="hourEnd" />
+                  <Input
+                    type="time"
+                    id="hourStart"
+                    name="hourStart"
+                    onChange={onFormChange}
+                  />
+                  <Input
+                    type="time"
+                    id="hourEnd"
+                    name="hourEnd"
+                    onChange={onFormChange}
+                  />
                 </div>
               </div>
             </div>
@@ -131,7 +176,7 @@ export function FormDialog({ selectData }: FormDialogProps) {
                 containerColor="bg-zinc-900"
                 indicatorColor="text-emerald-400"
                 iconSize={20}
-                onChange={(checked) => console.log(checked)}
+                onChange={setUseVoiceChannel}
               />
             </div>
 
