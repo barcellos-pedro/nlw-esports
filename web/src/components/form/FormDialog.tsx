@@ -1,4 +1,5 @@
 import * as Dialog from '@radix-ui/react-dialog';
+import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import { GameController, MagnifyingGlassPlus } from 'phosphor-react';
 import { getFirstLetter, WEEKDAYS } from '../../utils/week-days';
 import { CreateAdBanner } from '../CreateAdBanner';
@@ -82,18 +83,23 @@ export function FormDialog({ selectData }: FormDialogProps) {
               <div className="flex flex-col gap-2">
                 <label className="font-semibold" htmlFor="weekDays">
                   Quando costuma jogar?
-                  <div className="grid grid-cols-4 gap-2 pt-2">
+                  <ToggleGroup.Root
+                    type="multiple"
+                    orientation="horizontal"
+                    onValueChange={(day) => console.log(day)}
+                    className="grid grid-cols-4 gap-2 pt-2"
+                  >
                     {WEEKDAYS.map((value, index) => (
-                      <button
+                      <ToggleGroup.Item
                         key={index}
-                        type="button"
                         title={value}
+                        value={value}
                         className="w-10 h-10 py-2 px-4 bg-zinc-900 rounded hover:bg-zinc-700 active:bg-violet-500"
                       >
                         {getFirstLetter(value)}
-                      </button>
+                      </ToggleGroup.Item>
                     ))}
-                  </div>
+                  </ToggleGroup.Root>
                 </label>
               </div>
               <div className="flex flex-col gap-2 flex-1">
