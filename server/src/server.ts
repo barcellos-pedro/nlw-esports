@@ -37,6 +37,8 @@ app.get('/games', async (request, response) => {
 
 // Create new ad
 app.post('/games/:id/ads', async (request, response) => {
+  // TODO: Add form validation
+  // Zod => https://github.com/colinhacks/zod
   try {
     const gameId = request.params.id;
     const { body } = request;

@@ -26,7 +26,7 @@ export function FormDialog({ selectData }: FormDialogProps) {
   };
 
   // TODO: Add form validation
-  // Maybe Zod? => https://github.com/colinhacks/zod
+  // React Hook Form => https://react-hook-form.com/
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
