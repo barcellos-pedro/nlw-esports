@@ -1,4 +1,4 @@
-import { FlatList, Image } from 'react-native';
+import { FlatList, Image, Text } from 'react-native';
 import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
@@ -26,16 +26,10 @@ export function HomeScreen() {
   useEffect(() => {
     gamesService
       .getGames()
-      .then((data) => {
-        setGames(data);
-        setIsLoading(false);
-      })
-      .catch(console.error);
+      .then((data) => setGames(data))
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
   }, []);
-
-  if (isLoading) {
-    return <Loading />;
-  }
 
   return (
     <Background>
@@ -46,16 +40,24 @@ export function HomeScreen() {
           title="Encontre seu duo!"
           subtitle="Selecione o game que deseja jogar..."
         />
-        <FlatList
-          data={games}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.contentList}
-          keyExtractor={(game) => game.id}
-          renderItem={({ item: game }) => (
-            <GameCard game={game} key={game.id} onPress={navigateTo(game)} />
-          )}
-        />
+
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <FlatList
+            data={games}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.contentList}
+            keyExtractor={(game) => game.id}
+            renderItem={({ item: game }) => (
+              <GameCard game={game} key={game.id} onPress={navigateTo(game)} />
+            )}
+            ListEmptyComponent={
+              <Text style={styles.alert}>Sem games para exibir</Text>
+            }
+          />
+        )}
       </SafeAreaView>
     </Background>
   );
