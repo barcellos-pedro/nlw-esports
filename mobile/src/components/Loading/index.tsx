@@ -1,10 +1,12 @@
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, View, ViewProps } from 'react-native';
 import { THEME } from '../../theme';
 import { styles } from './styles';
 
-export function Loading() {
+interface LoadingProps extends ViewProps {}
+
+export function Loading({ ...viewProps }: LoadingProps) {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} {...viewProps}>
       <ActivityIndicator color={THEME.COLORS.PRIMARY} />
     </View>
   );
