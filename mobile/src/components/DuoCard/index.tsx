@@ -5,16 +5,13 @@ import { DuoInfo } from '../DuoInfo';
 import { styles } from './styles';
 import { THEME } from '../../theme';
 import { Ad } from '../../@types/ad';
-import { useState } from 'react';
-import { GameModal } from '../GameModal';
 
 interface DuoCardProps extends ViewProps {
   info: Ad;
+  onConnect: () => void;
 }
 
-export function DuoCard({ info, ...viewProps }: DuoCardProps) {
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
-
+export function DuoCard({ info, onConnect, ...viewProps }: DuoCardProps) {
   const getHour = (hour: 'hourStart' | 'hourEnd') => info[hour].split(':')[0];
 
   const getWeekDays = () => {
@@ -50,23 +47,10 @@ export function DuoCard({ info, ...viewProps }: DuoCardProps) {
         value={useVoiceChannel() ? 'Sim' : 'Não'}
         valueColor={voiceChannelTextColor()}
       />
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => setModalVisible(true)}
-      >
+      <TouchableOpacity style={styles.button} onPress={onConnect}>
         <Entypo name="game-controller" color={THEME.COLORS.TEXT} size={20} />
         <Text style={styles.buttonText}>Conectar</Text>
       </TouchableOpacity>
-
-      <GameModal
-        transparent
-        animationType="slide"
-        visible={modalVisible}
-        onClose={() => setModalVisible(false)}
-        title="Let's play!"
-        description="Agora é só começar a jogar!"
-        buttonDescription="Adicione no Discord"
-      />
     </View>
   );
 }

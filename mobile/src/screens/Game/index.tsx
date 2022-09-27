@@ -13,12 +13,14 @@ import { DuoCard } from '../../components/DuoCard';
 import { useEffect, useState } from 'react';
 import { Ad } from '../../@types/ad';
 import { gamesService } from '../../utils/games-service';
+import { GameModal } from '../../components/GameModal';
 
 export function GameScreen() {
   const route = useRoute();
   const game = route.params as Game;
   const navigation = useNavigation();
   const [ads, setAds] = useState<Ad[]>([]);
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   const goBack = () => navigation.goBack();
 
@@ -67,8 +69,24 @@ export function GameScreen() {
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.contentList}
-          renderItem={({ item: ad }) => <DuoCard key={ad.id} info={ad} />}
+          renderItem={({ item: ad }) => (
+            <DuoCard
+              key={ad.id}
+              info={ad}
+              onConnect={() => setModalVisible(true)}
+            />
+          )}
           ListEmptyComponent={<Text style={styles.alert}>Sem anúncios</Text>}
+        />
+
+        <GameModal
+          transparent
+          animationType="slide"
+          title="Let's play!"
+          description="Agora é só começar a jogar!"
+          buttonDescription="Adicione no Discord"
+          visible={modalVisible}
+          onClose={() => setModalVisible(false)}
         />
       </SafeAreaView>
     </Background>

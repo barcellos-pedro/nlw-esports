@@ -27,8 +27,8 @@ export function GameModal({
   ...modalProps
 }: GameModalProps) {
   return (
-    <Modal {...modalProps}>
-      {/* Overlay */}
+    <Modal {...modalProps} onRequestClose={onClose}>
+      {/* Background Overlay */}
       <View style={style.overlayContainer}>
         {/* Content */}
         <View style={style.contentContainer}>
@@ -52,7 +52,6 @@ export function GameModal({
 
           <View style={style.modalFooter}>
             <Text style={style.buttonDescription}>{buttonDescription}</Text>
-
             <TouchableOpacity style={style.button}>
               <Text style={style.buttonText}>Discord#1234</Text>
             </TouchableOpacity>
