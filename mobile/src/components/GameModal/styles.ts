@@ -6,7 +6,7 @@ export const style = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(18, 18, 20, 0.7)',
+    backgroundColor: THEME.COLORS.OVERLAY,
   },
   contentContainer: {
     width: 311,
