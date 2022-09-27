@@ -1,13 +1,17 @@
 import {
+  Alert,
   Modal,
   ModalProps,
+  Platform,
   Pressable,
   Text,
+  ToastAndroid,
   TouchableOpacity,
   View,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
+import * as Clipboard from 'expo-clipboard';
 
 import { style } from './styles';
 import { THEME } from '../../theme';
@@ -30,6 +34,23 @@ export function GameModal({
   discordUser,
   ...modalProps
 }: GameModalProps) {
+  const onCopyDiscord = async () => {
+    await Clipboard.setStringAsync(discordUser);
+
+    if (Platform.OS === 'android') {
+      ToastAndroid.showWithGravity(
+        `${discordUser} copied to clipboard`,
+        ToastAndroid.SHORT,
+        ToastAndroid.BOTTOM
+      );
+    } else {
+      Alert.alert(
+        'Discord copied to clipboard',
+        'Paste in Discord to start gaming!'
+      );
+    }
+  };
+
   return (
     <Modal {...modalProps} onRequestClose={onClose}>
       {/* Background Overlay */}
@@ -59,7 +80,11 @@ export function GameModal({
 
           <View style={style.modalFooter}>
             <Text style={style.buttonDescription}>{buttonDescription}</Text>
-            <TouchableOpacity style={style.button}>
+            <TouchableOpacity
+              style={style.button}
+              onPress={onCopyDiscord}
+              disabled={!discordUser}
+            >
               <Text style={style.buttonText}>
                 {discordUser ? discordUser : <Loading />}
               </Text>
