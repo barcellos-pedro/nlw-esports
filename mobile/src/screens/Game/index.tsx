@@ -21,13 +21,35 @@ export function GameScreen() {
   const navigation = useNavigation();
   const [ads, setAds] = useState<Ad[]>([]);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [userDiscord, setUserDiscord] = useState<string>('');
 
   const goBack = () => navigation.goBack();
+
+  const onConnect = (adId: string) => {
+    return async () => {
+      setModalVisible(true);
+      await getDiscord(adId);
+    };
+  };
+
+  const onCloseModal = () => {
+    setUserDiscord('');
+    setModalVisible(false);
+  };
 
   const fetchAds = async () => {
     try {
       const data = await gamesService.getAds(game.id);
       setAds(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getDiscord = async (id: string) => {
+    try {
+      const { discord } = await gamesService.getDiscordUser(id);
+      setUserDiscord(discord);
     } catch (error) {
       console.error(error);
     }
@@ -70,11 +92,7 @@ export function GameScreen() {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.contentList}
           renderItem={({ item: ad }) => (
-            <DuoCard
-              key={ad.id}
-              info={ad}
-              onConnect={() => setModalVisible(true)}
-            />
+            <DuoCard key={ad.id} info={ad} onConnect={onConnect(ad.id)} />
           )}
           ListEmptyComponent={<Text style={styles.alert}>Sem anúncios</Text>}
         />
@@ -86,7 +104,8 @@ export function GameScreen() {
           description="Agora é só começar a jogar!"
           buttonDescription="Adicione no Discord"
           visible={modalVisible}
-          onClose={() => setModalVisible(false)}
+          discordUser={userDiscord}
+          onClose={onCloseModal}
         />
       </SafeAreaView>
     </Background>
