@@ -12,11 +12,13 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { style } from './styles';
 import { THEME } from '../../theme';
 import { Heading } from '../Heading';
+import { Loading } from '../Loading';
 
 interface GameModalProps extends ModalProps {
   title: string;
   description: string;
   buttonDescription: string;
+  discordUser: string;
   onClose: () => void;
 }
 
@@ -25,6 +27,7 @@ export function GameModal({
   description,
   buttonDescription,
   onClose,
+  discordUser,
   ...modalProps
 }: GameModalProps) {
   return (
@@ -57,7 +60,9 @@ export function GameModal({
           <View style={style.modalFooter}>
             <Text style={style.buttonDescription}>{buttonDescription}</Text>
             <TouchableOpacity style={style.button}>
-              <Text style={style.buttonText}>Discord#1234</Text>
+              <Text style={style.buttonText}>
+                {discordUser ? discordUser : <Loading />}
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
