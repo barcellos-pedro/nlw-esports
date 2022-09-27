@@ -17,6 +17,7 @@ import { style } from './styles';
 import { THEME } from '../../theme';
 import { Heading } from '../Heading';
 import { Loading } from '../Loading';
+import { useState } from 'react';
 
 interface GameModalProps extends ModalProps {
   title: string;
@@ -34,7 +35,19 @@ export function GameModal({
   discordUser,
   ...modalProps
 }: GameModalProps) {
+  const [isCopying, setIsCopying] = useState<boolean>(false);
+
+  const buttonIcon = () => {
+    return !isCopying ? (
+      <AntDesign name="copy1" size={22} color={THEME.COLORS.CAPTION_300} />
+    ) : (
+      <AntDesign name="checkcircleo" size={22} color={THEME.COLORS.SUCCESS} />
+    );
+  };
+
   const onCopyDiscord = async () => {
+    setIsCopying(true);
+
     await Clipboard.setStringAsync(discordUser);
 
     if (Platform.OS === 'android') {
@@ -49,6 +62,8 @@ export function GameModal({
         'Paste in Discord to start gaming!'
       );
     }
+
+    setTimeout(() => setIsCopying(false), 3000);
   };
 
   return (
@@ -68,7 +83,7 @@ export function GameModal({
           <View style={style.modalBody}>
             <FontAwesome5
               name="discord"
-              color={THEME.COLORS.SUCCESS}
+              color={THEME.COLORS.PRIMARY}
               size={64}
             />
             <Heading
@@ -85,9 +100,14 @@ export function GameModal({
               onPress={onCopyDiscord}
               disabled={!discordUser}
             >
-              <Text style={style.buttonText}>
-                {discordUser ? discordUser : <Loading />}
-              </Text>
+              {!discordUser ? (
+                <Loading style={style.loading} />
+              ) : (
+                <View style={style.buttonContent}>
+                  <Text style={style.buttonText}>{discordUser}</Text>
+                  <Text>{buttonIcon()}</Text>
+                </View>
+              )}
             </TouchableOpacity>
           </View>
         </View>

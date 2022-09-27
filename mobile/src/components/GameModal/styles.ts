@@ -42,6 +42,15 @@ export const style = StyleSheet.create({
     width: 231,
     marginTop: 8,
   },
+  loading: {
+    paddingVertical: 2.5,
+  },
+  buttonContent: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+    paddingHorizontal: 32,
+  },
   buttonText: {
     color: THEME.COLORS.CAPTION_300,
     fontFamily: THEME.FONT_FAMILY.REGULAR,
