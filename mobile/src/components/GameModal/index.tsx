@@ -11,6 +11,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 import { style } from './styles';
 import { THEME } from '../../theme';
+import { Heading } from '../Heading';
 
 interface GameModalProps extends ModalProps {
   title: string;
@@ -46,8 +47,11 @@ export function GameModal({
               color={THEME.COLORS.SUCCESS}
               size={64}
             />
-            <Text style={style.title}>{title}</Text>
-            <Text style={style.description}>{description}</Text>
+            <Heading
+              style={style.modalContent}
+              title={title}
+              subtitle={description}
+            />
           </View>
 
           <View style={style.modalFooter}>

@@ -21,16 +21,9 @@ export const style = StyleSheet.create({
   modalBody: {
     alignItems: 'center',
   },
-  title: {
+  modalContent: {
+    alignItems: 'center',
     marginTop: 24,
-    color: THEME.COLORS.TEXT,
-    fontFamily: THEME.FONT_FAMILY.BLACK,
-    fontSize: THEME.FONT_SIZE.LG,
-  },
-  description: {
-    color: THEME.COLORS.TEXT,
-    fontFamily: THEME.FONT_FAMILY.REGULAR,
-    fontSize: THEME.FONT_SIZE.MD,
   },
   modalFooter: {
     marginTop: 24,
