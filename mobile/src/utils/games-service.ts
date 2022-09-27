@@ -33,4 +33,17 @@ export const gamesService = {
       throw error;
     }
   },
+  async getDiscordUser(id: string) {
+    try {
+      const response = await fetch(`${BASE_URL}/ads/${id}/discord`);
+      const data = await handleResponse<{ discord: string }>(
+        response,
+        'Failed to get user Discord'
+      );
+      await sleep();
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
